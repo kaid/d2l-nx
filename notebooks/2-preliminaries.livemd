@@ -1,0 +1,73 @@
+# 2. Preliminaries
+
+```elixir
+Mix.install(
+  [
+    {:nx, "~> 0.5"},
+    {:exla, "~> 0.5"}
+  ],
+  config: [nx: [default_backend: EXLA.Backend]]
+)
+
+import Nx.Defn
+```
+
+## 2.1. Data Manipulation
+
+### 2.1.1. Getting Started
+
+```elixir
+x_vector = Nx.iota({12})
+```
+
+```elixir
+Nx.size(x_vector)
+```
+
+```elixir
+Nx.shape(x_vector)
+```
+
+```elixir
+x_matrix = Nx.reshape(x_vector, {3, :auto})
+```
+
+```elixir
+x_zeros = Nx.broadcast(0, {2, 3, 4})
+```
+
+```elixir
+x_ones = Nx.broadcast(1, x_zeros)
+```
+
+```elixir
+{x_random, _key} = Nx.Random.normal(Nx.Random.key(0), shape: {3, 4})
+```
+
+```elixir
+x_tensor = Nx.tensor([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]], type: :s32)
+```
+
+### 2.1.2. Indexing and Slicing
+
+```elixir
+{x_matrix[-1], x_matrix[1..2]}
+```
+
+```elixir
+x_matrix_1 = Nx.put_slice(x_matrix, [1, 2], Nx.tensor([[17]]))
+```
+
+```elixir
+x_matrix_2 = Nx.put_slice(x_matrix_1, [0, 0], Nx.broadcast(12, x_matrix[0..1]))
+```
+
+### 2.1.3. Operations
+
+```elixir
+x_exp = Nx.exp(x_vector)
+```
+
+```elixir
+__MODULE__
+```
